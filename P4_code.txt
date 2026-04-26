@@ -1,0 +1,1 @@
+SELECT entity_id, makedate(Year, 1) as start_of_year, now() as curr_date, TIMESTAMPDIFF(YEAR, makedate(Year, 1), NOW()) as diff_time from infectious_cases_normalized;

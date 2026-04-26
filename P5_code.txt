@@ -1,0 +1,16 @@
+DROP FUNCTION IF EXISTS years_difference;
+
+DELIMITER //
+
+CREATE FUNCTION years_difference(year_input VARCHAR(10))
+RETURNS INT
+DETERMINISTIC 
+BEGIN
+    DECLARE result INT;
+    SET result = TIMESTAMPDIFF(YEAR, MAKEDATE(year_input, 1), NOW());
+    RETURN result;
+END //
+
+DELIMITER ;
+
+SELECT entity_id, Year, makedate(Year, 1) as start_of_year, now() as curr_date, pandemic.years_difference(Year) as diff_time from infectious_cases_normalized;
